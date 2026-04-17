@@ -1,5 +1,31 @@
 # ElsaFlow
 
+## Index
+
+* Overview
+* Workflow
+* Demo
+* Trade Mechanism
+* Features
+* Data Source and Real-Time Intelligence
+* Trading Strategy and Capital Model
+* Core Algorithm and Decision Strategy
+* Polymarket Track Alignment
+* Target Domains and Use Cases
+* Economic Model and Agent Monetization
+* Autonomous Trading Model and Capital Safety Logic
+* LLM + OSINT Agent Flow
+* How It Works
+* System Architecture
+* Execution Sequence
+* Project Structure
+* Setup and Run
+* Database
+* Alignment with Elsa and x402
+* Notes
+
+---
+
 ElsaFlow is an autonomous research-to-execution trading agent designed to demonstrate the execution model of agentic systems aligned with Elsa and x402.
 
 The system is implemented as a single Python script that automatically sets up its environment, installs dependencies, and launches a full Streamlit-based interface. It simulates a complete pipeline from research to execution, including cost handling and settlement.
@@ -17,14 +43,11 @@ ElsaFlow showcases how an autonomous agent can operate end-to-end without manual
 * Apply x402-style monetization
 * Settle results and persist data
 
-The design prioritizes clarity, determinism, and full pipeline visibility.
-
 ---
 
 ## Workflow
 
 <img width="1536" height="1024" alt="work-flow" src="https://github.com/user-attachments/assets/618b2871-7e40-47e2-a16e-0154f34de40a" />
-<img width="1536" height="1024" alt="about" src="https://github.com/user-attachments/assets/9d85b0a7-6d3a-4107-b919-1f6b2db47b68" />
 
 ---
 
@@ -35,68 +58,227 @@ https://www.loom.com/share/ad1290f386534856a2a21af546db9c37
 
 ---
 
+## Trade Mechanism
+
+<img width="1536" height="1024" alt="trade-mechanism" src="https://github.com/user-attachments/assets/7ea1c500-b36d-4f59-8b1d-86539543c3b9" />
+
+---
+
 ## Features
 
 ### Autonomous Agent Pipeline
 
 * Research → Decision → Execution → Settlement
-* Deterministic and reproducible behavior
 
 ### Research Module
 
 * Perplexity-style structured output
-* Market-based sentiment classification
 
 ### Decision Engine
 
 * Positive → YES
 * Negative → NO
 * Neutral → SKIP
-* Confidence scoring
 
 ### Execution Layer
 
 * Simulated testnet trades
-* Transaction hash generation
-* Execution status tracking
 
 ### x402 Monetization Simulation
 
-* Research cost tracking
-* Execution cost tracking
-* Total cost computation
+* Cost tracking
 
 ### Settlement Engine
 
-* Profit and loss simulation
-* Payout preference handling (USD/Crypto)
+* Profit/loss simulation
 
 ### Persistence
 
 * SQLite database
-* Full trade history stored locally
 
 ### User Interface
 
-* Streamlit-based UI
-* Light/Dark theme toggle
-* Live execution logs
-* Structured output panels
+* Minimal Streamlit UI acting as control layer
+
+---
+
+## Data Source and Real-Time Intelligence
+
+ElsaFlow is designed to operate on OSINT-based real-world data.
+
+The backend integrates with systems like **ShadowBroker (OSS data aggregator)**:
+
+* Real-time data ingestion
+* Event-driven signals
+* Continuous analysis
+
+This enables dynamic decision-making instead of static logic.
+
+---
+
+## Trading Strategy and Capital Model
+
+* User sets **initial capital**
+* Agent trades until:
+
+  * Capital + profit threshold (e.g., 50%) reached
+
+### Break-even Logic
+
+* Initial capital is returned
+* System enters **profit-only mode**
+
+---
+
+## Core Algorithm and Decision Strategy
+
+1. OSINT Data Ingestion
+2. Sentiment Analysis
+3. Decision Mapping
+4. Confidence Scoring
+5. Trade Execution
+6. Continuous learning loop
+
+---
+
+## Polymarket Track Alignment
+
+Built for:
+
+Track 2 — Polymarket Agent
+
+* Converts signals → trades
+* Simulates execution
+* Provides explainable outputs
+
+---
+
+## Target Domains and Use Cases
+
+* Crypto
+* Finance
+* Prediction markets
+* Elections
+* AI / IoT trends
+
+---
+
+## Economic Model and Agent Monetization
+
+* Agents pay for:
+
+  * Research
+  * Execution
+
+* x402 enables:
+
+  * Autonomous cost handling
+  * Continuous economic activity
+
+---
+
+## Autonomous Trading Model and Capital Safety Logic
+
+### Minimal Interface
+
+User only:
+
+* Selects category (mapped to ShadowBroker data)
+* Defines intent
+* Sets capital
+
+---
+
+### Capital Safety Flow
+
+1. Initial Trading Phase
+2. Recovery Phase
+3. Safe Rollback → Capital returned
+
+---
+
+### Profit Loop
+
+* Agent trades using only profits
+* 50% profit → returned to user
+* Remaining → reinvested
+
+---
+
+### Risk Control
+
+* Max loss: 40% of profits
+* If triggered:
+
+  * Agent halts trading
+  * Switches to analysis mode
+  * Requires user approval
+
+---
+
+### Transparency
+
+* SQLite logs
+* Full trade history
+* Performance tracking
+
+---
+
+## LLM + OSINT Agent Flow
+
+```mermaid
+flowchart LR
+
+A[User Input UI] --> B[Agent Controller]
+
+B --> C[Custom LLM Model]
+C --> D[Decision Engine]
+
+B --> E[ShadowBroker Local API]
+E --> F[OSINT Data Stream]
+
+F --> C
+
+D --> G[Execution Engine]
+G --> H[Trade Simulation]
+
+H --> I[x402 Cost Layer]
+I --> J[Settlement Engine]
+
+J --> K[SQLite DB]
+K --> L[UI Logs & Dashboard]
+```
+
+---
+
+## ShadowBroker Integration 
+
+<img width="1897" height="872" alt="image" src="https://github.com/user-attachments/assets/c8e690fe-1b01-40de-b4d9-312bfd1dedea" />
+
+```python
+# Placeholder for ShadowBroker API integration
+
+def fetch_osint_data(category):
+    """
+    Connect to local ShadowBroker instance
+    Fetch relevant OSINT data for selected market
+    """
+    pass
+```
 
 ---
 
 ## How It Works
 
-1. User inputs wallet address, intent, and market
-2. Agent performs structured research and assigns sentiment
-3. Decision engine determines trade action
-4. Execution layer simulates trade with transaction hash
-5. x402 module simulates operational costs
-6. Settlement engine calculates outcome
-7. Trade is stored in SQLite database
-8. UI displays results and logs
-
----
+1. User inputs wallet, intent, market
+2. Agent fetches OSINT data
+3. LLM processes signals
+4. Decision engine selects trade
+5. Execution simulated
+6. Cost applied (x402)
+7. Settlement computed
+8. Stored in DB
+9. Displayed in UI
 
 ## System Architecture
 
