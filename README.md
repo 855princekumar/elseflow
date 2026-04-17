@@ -24,6 +24,7 @@ The design prioritizes clarity, determinism, and full pipeline visibility.
 ## Workflow
 
 <img width="1536" height="1024" alt="work-flow" src="https://github.com/user-attachments/assets/618b2871-7e40-47e2-a16e-0154f34de40a" />
+<img width="1536" height="1024" alt="about" src="https://github.com/user-attachments/assets/9d85b0a7-6d3a-4107-b919-1f6b2db47b68" />
 
 ---
 
