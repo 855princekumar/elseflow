@@ -1,29 +1,41 @@
-# ElsaFlow
+<img width="1200" height="260" alt="banner" src="https://github.com/user-attachments/assets/034d574b-3bd5-4e41-8bde-29257a54b6dd" />
+
+![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
+![Streamlit](https://img.shields.io/badge/UI-Streamlit-red.svg)
+![SQLite](https://img.shields.io/badge/Database-SQLite-lightgrey.svg)
+![Status](https://img.shields.io/badge/Status-Working-brightgreen.svg)
+![License](https://img.shields.io/badge/License-MIT-yellow.svg)
+![Track](https://img.shields.io/badge/Track-Polymarket%20Agent-purple.svg)
+![Architecture](https://img.shields.io/badge/Architecture-Agentic%20AI-black.svg)
+
+---
 
 ## Index
 
-* Overview
-* Workflow
-* Demo
-* Trade Mechanism
-* Features
-* Data Source and Real-Time Intelligence
-* Trading Strategy and Capital Model
-* Core Algorithm and Decision Strategy
-* Polymarket Track Alignment
-* Target Domains and Use Cases
-* Economic Model and Agent Monetization
-* Autonomous Trading Model and Capital Safety Logic
-* LLM + OSINT Agent Flow
-* How It Works
-* System Architecture
-* Execution Sequence
-* Project Structure
-* Setup and Run
-* Database
-* Alignment with Elsa and x402
-* Notes
-
+* [Overview](#overview)
+* [Workflow](#workflow)
+* [Demo](#demo)
+* [Trade Mechanism](#trade-mechanism)
+* [Features](#features)
+* [Data Source and Real-Time Intelligence](#data-source-and-real-time-intelligence)
+* [Trading Strategy and Capital Model](#trading-strategy-and-capital-model)
+* [Core Algorithm and Decision Strategy](#core-algorithm-and-decision-strategy)
+* [Polymarket Track Alignment](#polymarket-track-alignment)
+* [Target Domains and Use Cases](#target-domains-and-use-cases)
+* [Economic Model and Agent Monetization](#economic-model-and-agent-monetization)
+* [Autonomous Trading Model and Capital Safety Logic](#autonomous-trading-model-and-capital-safety-logic)
+* [LLM + OSINT Agent Flow](#llm--osint-agent-flow)
+* [ShadowBroker Integration](#shadowbroker-integration)
+* [How It Works](#how-it-works)
+* [System Architecture](#system-architecture)
+* [Execution Sequence](#execution-sequence)
+* [Project Structure](#project-structure)
+* [Setup and Run](#setup-and-run)
+* [Access the Application](#access-the-application)
+* [Database](#database)
+* [Alignment with Elsa and x402](#alignment-with-elsa-and-x402)
+* [Notes](#notes)
+* [License](#license)
 ---
 
 ElsaFlow is an autonomous research-to-execution trading agent designed to demonstrate the execution model of agentic systems aligned with Elsa and x402.
@@ -61,6 +73,12 @@ https://www.loom.com/share/ad1290f386534856a2a21af546db9c37
 ## Trade Mechanism
 
 <img width="1536" height="1024" alt="trade-mechanism" src="https://github.com/user-attachments/assets/7ea1c500-b36d-4f59-8b1d-86539543c3b9" />
+
+---
+
+##  Data aggregator OSINT Based
+
+<img width="1897" height="872" alt="image" src="https://github.com/user-attachments/assets/306eeecf-79e2-494c-9983-24108194ec02" />
 
 ---
 
