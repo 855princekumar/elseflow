@@ -19,7 +19,6 @@ class AppSettings:
     shadowbroker_base_url: str
     elsa_x402_base_url: str
     database_path: Path
-    profile_path: Path
     wallet: WalletConfig
     transfer_policy: TransferPolicy
     model_endpoints: dict[str, str]
@@ -37,7 +36,6 @@ def load_settings() -> AppSettings:
         shadowbroker_base_url=os.getenv("SHADOWBROKER_BASE_URL", "http://localhost:8080"),
         elsa_x402_base_url=os.getenv("ELSAX402_BASE_URL", "http://localhost:4020"),
         database_path=Path(os.getenv("DATABASE_PATH", str(DEFAULT_DB_PATH))),
-        profile_path=DEFAULT_DATA_DIR / "runtime_profile.json",
         wallet=WalletConfig(),
         transfer_policy=TransferPolicy(),
         model_endpoints=model_endpoints,

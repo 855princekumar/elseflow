@@ -58,6 +58,10 @@ def _ensure_autonomous_controller() -> dict:
     return st.session_state.autonomous_controller
 
 
+def _legacy_profile_path(settings) -> Path:
+    return settings.database_path.parent / "runtime_profile.json"
+
+
 def _short_wallet(address: str) -> str:
     if not address or len(address) < 12:
         return address
@@ -377,7 +381,7 @@ def run_app() -> None:
     session = _ensure_session()
     controller = _ensure_autonomous_controller()
     settings = agent.settings
-    profile = load_profile(settings.profile_path)
+    profile = load_profile(db, _legacy_profile_path(settings))
     current_logs = db.read_table("logs")
     session_logs = current_logs[current_logs["session_id"] == session.session_id].copy() if not current_logs.empty else pd.DataFrame()
 
@@ -490,9 +494,9 @@ def run_app() -> None:
         settings.model_endpoints = {
             "openrouter": openrouter_key,
         }
-        if st.button("Save Local Profile", use_container_width=True):
+        if st.button("Save Runtime Settings", use_container_width=True):
             save_profile(
-                settings.profile_path,
+                db,
                 {
                     "user_wallet_address": session.user_wallet_address,
                     "agent_wallet_address": session.agent_wallet_address,
@@ -501,7 +505,7 @@ def run_app() -> None:
                     "api_keys": settings.model_endpoints,
                 },
             )
-            st.success("Local runtime profile saved.")
+            st.success("Runtime settings saved to SQLite.")
 
         settings.transfer_policy.bootstrap_amount_usd = st.number_input(
             "Bootstrap capital (USD)", min_value=1.0, value=float(session.bootstrap_principal_usd), step=1.0,

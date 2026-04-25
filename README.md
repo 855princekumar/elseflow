@@ -490,16 +490,26 @@ Key modules:
 ### Run the application
 
 ```powershell
-python -m venv .venv
-.venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-streamlit run app.py
+python app.py
 ```
+
+The launcher will:
+
+* create `.venv` automatically if it does not exist
+* install or refresh dependencies when `requirements.txt` changes
+* relaunch the app inside the project virtual environment
+* start Streamlit in one go
 
 If `python` is not recognized:
 
 ```powershell
-py -3.11 -m venv .venv
+py -3.11 app.py
+```
+
+Manual environment setup is still available if you want direct control:
+
+```powershell
+python -m venv .venv
 .venv\Scripts\Activate.ps1
 python -m pip install -r requirements.txt
 python -m streamlit run app.py

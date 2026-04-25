@@ -104,6 +104,12 @@ class Database:
                     created_at TEXT NOT NULL,
                     payload_json TEXT NOT NULL
                 );
+
+                CREATE TABLE IF NOT EXISTS app_profiles (
+                    profile_key TEXT PRIMARY KEY,
+                    updated_at TEXT NOT NULL,
+                    payload_json TEXT NOT NULL
+                );
                 """
             )
 
@@ -174,4 +180,27 @@ class Database:
             conn.execute(
                 f"UPDATE {table} SET payload_json = ?, created_at = ? WHERE {key_name} = ?",
                 (json.dumps(payload), payload.get("created_at", ""), key_value),
+            )
+
+    def load_app_profile(self, profile_key: str) -> dict[str, Any] | None:
+        with self.connect() as conn:
+            row = conn.execute(
+                "SELECT payload_json FROM app_profiles WHERE profile_key = ?",
+                (profile_key,),
+            ).fetchone()
+        if not row:
+            return None
+        return json.loads(row[0])
+
+    def save_app_profile(self, profile_key: str, payload: dict[str, Any], updated_at: str) -> None:
+        with self.connect() as conn:
+            conn.execute(
+                """
+                INSERT INTO app_profiles (profile_key, updated_at, payload_json)
+                VALUES (?, ?, ?)
+                ON CONFLICT(profile_key) DO UPDATE SET
+                    updated_at=excluded.updated_at,
+                    payload_json=excluded.payload_json
+                """,
+                (profile_key, updated_at, json.dumps(payload)),
             )
