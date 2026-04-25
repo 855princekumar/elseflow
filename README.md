@@ -464,7 +464,7 @@ The project now has:
 * `app.py` as the entry point
 * `elsaflow/` modular application package
 * `scripts/` helper scripts
-* `data/` runtime database and profile files
+* `data/` local runtime artifacts when the app is executed
 * `tests/` validation scaffolding
 
 Key modules:
@@ -536,7 +536,7 @@ http://localhost:8501
 
 ## Database
 
-SQLite database file:
+SQLite is used as the local runtime store.
 
 * `data/elsaflow.db`
 
@@ -552,6 +552,12 @@ It stores:
 * x402 payments
 * audit events
 * logs
+
+Important:
+
+* runtime database files are local operator artifacts and should not be committed to git
+* saved settings now persist in SQLite rather than needing hardcoded defaults in source
+* generated caches such as `__pycache__/` should also stay out of version control
 
 ---
 
@@ -580,7 +586,6 @@ rather than claiming finished on-chain trading integration.
 
 The project includes:
 
-* bundled sample backtest data
 * CLI backtest runner
 * replay validation
 * GUI export analysis
@@ -589,8 +594,17 @@ The project includes:
 Backtest CLI:
 
 ```powershell
-python scripts\run_backtest.py --csv data\backtest_sample.csv --capital 10
+python scripts\run_backtest.py --csv path\to\your_backtest.csv --capital 10
 ```
+
+Expected CSV columns:
+
+* `timestamp`
+* `category`
+* `market_topic`
+* `sentiment_score`
+* `relevance_score`
+* `market_move_pct`
 
 Validation checks include:
 
@@ -607,7 +621,7 @@ Validation checks include:
 Current safe scope:
 
 * real OSINT collection where available
-* real OpenRouter analysis calls
+* support for live OpenRouter analysis calls with heuristic fallback
 * paper execution
 * manual-live-ready intent generation
 * signer readiness checks
@@ -636,6 +650,7 @@ The code now supports compliance readiness patterns, but code alone does not mak
 
 * Original hackathon concept has been retained, but the implementation is now evolving toward an MVP
 * ShadowBroker is a key architectural reference and intended future integration path
+* Keep local runtime secrets, SQLite runtime files, and generated caches out of the public repo
 * The GitHub repo for this project is:
   * https://github.com/855princekumar/elseflow
 * This repository should now be treated as the active build path beyond the initial single-script showcase
